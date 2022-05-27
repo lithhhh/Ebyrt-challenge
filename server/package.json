@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "ts-node-dev src/api/index.ts",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "test:dev": "mocha -r ts-node/register src/tests/unit/**/*.test.ts --exit -t 60000"
+    "test:dev": "mocha -r ts-node/register src/tests/unit/**/*.test.ts --exit -t 60000",
+    "reset": "mongo Ebyrt-to-do --eval 'db.dropDatabase()'"
   },
   "keywords": [],
   "author": "",
