@@ -14,7 +14,6 @@ const zodMiddleware = (
     
     return res.status(StatusCode.BAD_REQUEST).json({ error: message });
   }
-  console.log('passa aqui');
 
   return next(err);
 };

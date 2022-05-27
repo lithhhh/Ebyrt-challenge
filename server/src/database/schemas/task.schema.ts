@@ -4,9 +4,10 @@ import { ITask } from '../interfaces';
 interface TaskDocument extends ITask, Document { }
 
 const taskSchema = new Schema<TaskDocument>({
-  title: String,
-  color: String,
-  status: String,
+  title: { type: String, required: true },
+  color: { type: String, default: '#ffffff' },
+  status: { type: String, default: 'pendente' },
+  details: { type: String, default: '' },
 }, { versionKey: false });
 
 export default taskSchema;
