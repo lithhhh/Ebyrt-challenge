@@ -10,8 +10,6 @@ const domainMiddleware = (
   res: Response,
   next: NextFunction,
 ) => {
-  console.log('passa aqui 2');
-  
   if (isDomainError(err)) {
     console.error(err);
 
