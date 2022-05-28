@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import api from '../utils/api';
 import TaskContext from '../context/myContext';
 
@@ -8,19 +8,17 @@ const taskSchema = {
 
 function Input() {
   const [task, setTask] = useState(taskSchema);
-  const { setTasks, tasks } = useContext(TaskContext);
+  const { setTasks } = useContext(TaskContext);
 
   const handlerSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const req = await api.post('/task', {
+      const { data } = await api.post('/task', {
         ...task,
       });
-      setTasks((cur) => [...cur, task]);
+      setTasks((cur) => [...cur, data.created]);
       setTask(taskSchema);
-      console.log(req);
-      console.log(tasks);
     } catch (err) {
       console.log(err);
       alert('houve um erro ao adicionar a task.');
@@ -36,7 +34,6 @@ function Input() {
     });
   };
 
-  useEffect(() => console.log(tasks), [tasks]);
   return (
     <div>
       <form onSubmit={ handlerSubmit }>
