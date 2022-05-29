@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Button, ButtonGroup, Card, Col, Dropdown, DropdownButton,
+  ButtonGroup, Card, Col, Dropdown, DropdownButton,
 } from 'react-bootstrap';
 
-import EditModal from './sub.components/edit.modal';
+import { EditModal, DeleteButton } from './sub.components';
 
 function CardTask({
   title, details, status, color, id,
@@ -22,7 +22,7 @@ function CardTask({
           </Card.Text>
           <ButtonGroup className="d-flex">
             <EditModal color={ color } title={ title } details={ details } id={ id } />
-            <Button>Deletar</Button>
+            <DeleteButton id={ id } />
               <DropdownButton as={ButtonGroup} title={ status } id="bg-nested-dropdown">
               <Dropdown.Item eventKey="1">Pendente</Dropdown.Item>
               <Dropdown.Item eventKey="2">Em andamento</Dropdown.Item>
