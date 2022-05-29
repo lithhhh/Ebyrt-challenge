@@ -4,10 +4,13 @@ import {
   Button, ButtonGroup, Card, Col, Dropdown, DropdownButton,
 } from 'react-bootstrap';
 
+import EditModal from './sub.components/edit.modal';
+
 function CardTask({
-  title, details, status, color,
+  title, details, status, color, id,
 }) {
   // const [taskId] = useState(id);
+
   return (
     <Col>
       <Card style={{ backgroundColor: color }}>
@@ -18,7 +21,7 @@ function CardTask({
             { details }
           </Card.Text>
           <ButtonGroup className="d-flex">
-            <Button>Editar</Button>
+            <EditModal color={ color } title={ title } details={ details } id={ id } />
             <Button>Deletar</Button>
               <DropdownButton as={ButtonGroup} title={ status } id="bg-nested-dropdown">
               <Dropdown.Item eventKey="1">Pendente</Dropdown.Item>
@@ -37,6 +40,7 @@ CardTask.propTypes = {
   details: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 export default CardTask;
