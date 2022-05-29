@@ -13,13 +13,14 @@ function Tasks() {
       <Input />
       <Row xs={1} md={3} className="g-4">
         {Array.from(tasks).map(({
-          title, color, details, status,
+          title, color, details, status, _id,
         }, idx) => (
           <CardTask
             key={ idx }
             title={ title }
             color={ color }
             details={ details }
+            id={ _id }
             status={ status }
           />
         ))}
