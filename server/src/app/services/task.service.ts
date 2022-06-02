@@ -5,7 +5,10 @@ import {
   TasksTypes,
   DomainError,
   StatusCode,
-  MessageErrors } from '../helpers';
+  MessageErrors,
+  statusSchema,
+  StatusTypes,
+} from '../helpers';
 import { ServiceError } from '../interfaces';
 import { TaskModel } from '../models';
 
@@ -50,5 +53,21 @@ export default class TaskService extends Service<TasksTypes> {
       throw new DomainError(StatusCode.NOT_FOUND, MessageErrors.TASK_NOT_FOUND);
     }
     return this.model.delete(id);
+  };
+
+  updateStatus = async (
+    id: string,
+    obj: TasksTypes,
+  ): Promise<TasksTypes | ServiceError | null> => {
+    idSchema.parse(id);
+    statusSchema.parse(obj.status);
+
+    const task = await this.model.readOne(id);
+    
+    if (!task) {
+      throw new DomainError(StatusCode.NOT_FOUND, MessageErrors.TASK_NOT_FOUND);
+    }
+
+    return this.model.update(id, obj);
   };
 }

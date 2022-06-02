@@ -16,11 +16,18 @@ export default abstract class Service<T> {
     return this.model.update(id, obj);
   }
 
-  public readOne(id: string): Promise<T | ServiceError | null> {
+  public async readOne(id: string): Promise<T | ServiceError | null> {
     return this.model.readOne(id);
   }
 
   public async delete(id: string): Promise<T | null | ServiceError> {
     return this.model.delete(id);
+  }
+
+  public async updateStatus(
+    id: string,
+    obj: T,
+  ): Promise<T | null | ServiceError> {
+    return this.model.update(id, obj);
   }
 }
