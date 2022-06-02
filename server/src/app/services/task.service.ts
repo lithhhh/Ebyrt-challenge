@@ -7,7 +7,6 @@ import {
   StatusCode,
   MessageErrors,
   statusSchema,
-  StatusTypes,
 } from '../helpers';
 import { ServiceError } from '../interfaces';
 import { TaskModel } from '../models';
