@@ -10,6 +10,10 @@ const taskSchema = z.object({
 
 const idSchema = z.string().min(1);
 
-type TasksTypes = z.infer<typeof taskSchema>; 
+const statusSchema = z.object(
+  { status: z.enum(['pendente', 'Em andamento', 'pronto']) },
+);
 
-export { taskSchema, TasksTypes, idSchema };
+type TasksTypes = z.infer<typeof taskSchema>;
+
+export { taskSchema, TasksTypes, idSchema, statusSchema };
