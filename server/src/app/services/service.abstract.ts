@@ -23,11 +23,4 @@ export default abstract class Service<T> {
   public async delete(id: string): Promise<T | null | ServiceError> {
     return this.model.delete(id);
   }
-
-  public async updateStatus(
-    id: string,
-    obj: T,
-  ): Promise<T | null | ServiceError> {
-    return this.model.update(id, obj);
-  }
 }
