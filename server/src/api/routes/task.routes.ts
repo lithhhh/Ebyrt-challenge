@@ -17,6 +17,7 @@ export default class TaskRouter {
     this.read();
     this.delete();
     this.update();
+    this.updateStatus();
   }
 
   private create(): void {
@@ -28,9 +29,7 @@ export default class TaskRouter {
   }
 
   private read(): void {
-    this.router.get(this.route, async (req: Request, res: Response) => {
-      console.log('entra');
-      
+    this.router.get(`${this.route}s`, async (req: Request, res: Response) => {
       const tasks = await this.taskController.read();
 
       return res.status(200).json(tasks);
@@ -58,6 +57,20 @@ export default class TaskRouter {
         const { id } = req.params;
 
         await this.taskController.delete(id);
+
+        return res.status(204).end();
+      },
+    );
+  }
+
+  private updateStatus(): void {
+    this.router.patch(
+      `${this.route}/:id`,
+      async (req: Request, res: Response) => {
+        const { id } = req.params;
+        const { body } = req;
+
+        const taskUpdated = await this.taskController.updateStatus(id, body);
 
         return res.status(204).end();
       },
