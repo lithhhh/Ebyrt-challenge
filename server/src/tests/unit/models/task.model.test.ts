@@ -51,7 +51,14 @@ describe('task.model', () => {
   });
   describe('read', () => {
     test('returns an array of objects containing the required keys', async () => {
+      const allTasks = await tasks.read();
 
+      expect(allTasks).to.be.a('array');
+
+      allTasks.forEach((task) => {
+        expect(task).to.be.a('object');
+        expect(task).to.contain.all.keys('id', 'status', 'title', 'details', 'color');
+      });
     });
   });
 });
