@@ -13,6 +13,14 @@ interface ITaskMock extends TasksTypes {
 
 
 describe('task.model', () => {
+  before(() => {
+    sinon.stub(Model, 'create').resolves(tasksMock.tasks[0] as unknown as ITaskMock)
+    sinon.stub(Model, 'findOneAndDelete').resolves(tasksMock.tasks[0] as unknown as ITaskMock)
+    sinon.stub(Model, 'findOneAndUpdate').resolves(tasksMock.tasks[0] as unknown as ITaskMock)
+    sinon.stub(Model, 'find').resolves(tasksMock.tasks as unknown as ITaskMock[])
+  });
+  after(() => sinon.restore());
+
   const tasks = new TaskModel();
 
   describe('create', () => {
