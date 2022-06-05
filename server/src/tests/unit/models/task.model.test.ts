@@ -7,6 +7,11 @@ import { TaskModel } from '../../../app/models';
 import { TasksTypes } from '../../../app/helpers';
 import { tasksMock } from '../../mocks';
 
+interface ITaskMock extends TasksTypes {
+  id: string,
+} 
+
+
 describe('task.model', () => {
   const tasks = new TaskModel();
 
