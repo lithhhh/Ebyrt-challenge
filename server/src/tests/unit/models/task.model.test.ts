@@ -42,7 +42,12 @@ describe('task.model', () => {
   });
 
   describe('update', () => {
+    test('an object is returned containing the required keys', async () => {
+      const updated = await tasks.update('1', tasksMock.creatingATask as TasksTypes);
 
+      expect(updated).to.be.a('object');
+      expect(updated).to.contain.all.keys('id', 'status', 'title', 'details', 'color');
+    });
   });
   describe('read', () => {
     test('returns an array of objects containing the required keys', async () => {
