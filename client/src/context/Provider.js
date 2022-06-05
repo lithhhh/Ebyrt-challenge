@@ -9,7 +9,7 @@ function Provider({ children }) {
 
   const getTasks = async () => {
     try {
-      const { data } = await api.get('/task');
+      const { data } = await api.get('/tasks');
       setTasks(data);
     } catch (err) {
       console.log(err);
