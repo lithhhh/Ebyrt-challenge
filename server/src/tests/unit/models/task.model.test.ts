@@ -24,7 +24,12 @@ describe('task.model', () => {
   const tasks = new TaskModel();
 
   describe('create', () => {
+    test('an object is returned containing the required keys', async () => {
+      const created = await tasks.create(tasksMock.creatingATask as TasksTypes);
 
+      expect(created).to.be.a('object');
+      expect(created).to.contain.all.keys('id', 'status', 'title', 'details', 'color');
+    });
   });
 
   describe('delete', () => {
