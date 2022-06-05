@@ -6,7 +6,7 @@ interface TaskDocument extends ITask, Document { }
 const taskSchema = new Schema<TaskDocument>({
   title: { type: String, required: true },
   color: { type: String, default: '#ffffff' },
-  status: { type: String, default: 'pendente' },
+  status: { type: String, default: 'Pendente' },
   details: { type: String, default: '' },
 }, { versionKey: false });
 
