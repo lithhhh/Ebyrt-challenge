@@ -33,7 +33,12 @@ describe('task.model', () => {
   });
 
   describe('delete', () => {
+    test('an object is returned containing the required keys', async () => {
+      const deleted = await tasks.delete('1');
 
+      expect(deleted).to.be.a('object');
+      expect(deleted).to.contain.all.keys('id', 'status', 'title', 'details', 'color');
+    });
   });
 
   describe('update', () => {
