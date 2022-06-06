@@ -38,6 +38,11 @@ describe('task.service', () => {
     });
 
     describe('ok case', () => {
+      test('if returns an object containing a created task', async () => {
+        expect(
+          await taskService.create(tasksMock.creatingATask as TasksTypes)
+        ).to.be.deep.equal(tasksMock.tasks[0])
+      });
     });
   });
 
