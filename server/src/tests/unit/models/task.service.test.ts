@@ -1,8 +1,10 @@
 import sinon from 'sinon';
 import { expect } from 'chai';
 import { test } from 'mocha';
+import { unknown, ZodError } from 'zod';
 
 import { TaskModel } from '../../../app/models';
+import { TaskService } from '../../../app/services';
 import { TasksTypes } from '../../../app/helpers';
 import { tasksMock } from '../../mocks';
 
@@ -11,30 +13,61 @@ interface ITaskMock extends TasksTypes {
 }
 
 describe('task.service', () => {
-  const taskModel = new TaskModel();
+  const taskModelMocked = new TaskModel();
+  const taskService = new TaskService(taskModelMocked);
 
   before(() => {
-    sinon.stub(taskModel, 'create').resolves(tasksMock.tasks[0] as unknown as ITaskMock)
-    sinon.stub(taskModel, 'delete').resolves(tasksMock.tasks[0] as unknown as ITaskMock)
-    sinon.stub(taskModel, 'update').resolves(tasksMock.tasks[0] as unknown as ITaskMock)
-    sinon.stub(taskModel, 'read').resolves(tasksMock.tasks as unknown as ITaskMock[])
+    sinon.stub(taskModelMocked, 'create').resolves(tasksMock.tasks[0] as unknown as ITaskMock)
+    sinon.stub(taskModelMocked, 'delete').resolves(tasksMock.tasks[0] as unknown as ITaskMock)
+    sinon.stub(taskModelMocked, 'update').resolves(tasksMock.tasks[0] as unknown as ITaskMock)
+    sinon.stub(taskModelMocked, 'read').resolves(tasksMock.tasks as unknown as ITaskMock[])
   });
 
   after(() => sinon.restore());
 
   describe('create', () => {
+    describe('error case', () => {
+      test('throws an error if there are errors in the request object', async () => {
+        try {
+          await taskService.create(tasksMock.wrongTask as TasksTypes)
+        } catch (e) {          
+          expect(e instanceof ZodError).to.be.true;
+          expect(e instanceof Error).to.be.true;
+        }
+      });
+    });
 
+    describe('ok case', () => {
+    });
   });
 
   describe('update', () => {
-    test('', () => {});
+    describe('error case', () => {
+      test('', () => {});
+    });
+
+    describe('ok case', () => {
+      test('', () => {});
+    });
   });
 
   describe('delete', () => {
-    test('', () => {});
+    describe('error case', () => {
+      test('', () => {});
+    });
+
+    describe('ok case', () => {
+      test('', () => {});
+    });
   });
 
   describe('read', () => {
-    test('', () => {});
+    describe('error case', () => {
+      test('', () => {});
+    });
+
+    describe('ok case', () => {
+      test('', () => {});
+    });
   });
 });
