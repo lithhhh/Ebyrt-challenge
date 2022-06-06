@@ -28,5 +28,12 @@ export default {
     color: '#ffffff',
     status: 'Pendente',
     details: ''
+  },
+
+  wrongTask: {
+    title: 'abc',
+    color: '#ffffff',
+    status: 'Pendente',
+    details: ''
   }
 }
