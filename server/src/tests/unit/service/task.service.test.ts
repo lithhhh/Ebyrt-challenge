@@ -104,7 +104,23 @@ describe('task.service', () => {
 
   describe('delete', () => {
     describe('error case', () => {
-      test('', () => {});
+      test('throws an error if id is not a string', async () => {
+        try {
+          await taskService.delete(1 as unknown as string);
+        } catch (e) {          
+          expect(e instanceof ZodError).to.be.true;
+          expect(e instanceof Error).to.be.true;
+        }
+      });
+
+      test('throws a DomainError if ID not found', async () => {
+        try {
+          await taskService.delete('1')
+        } catch (e) {          
+          expect(e instanceof DomainError).to.be.true;
+          expect(e instanceof Error).to.be.true;
+        }
+      });
     });
 
     describe('ok case', () => {
