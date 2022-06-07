@@ -5,7 +5,7 @@ import { ZodError } from 'zod';
 
 import { TaskModel } from '../../../app/models';
 import { TaskService } from '../../../app/services';
-import { TasksTypes } from '../../../app/helpers';
+import { DomainError, TasksTypes } from '../../../app/helpers';
 import { tasksMock } from '../../mocks';
 
 interface ITaskMock extends TasksTypes {
@@ -34,6 +34,7 @@ describe('task.service', () => {
       .onCall(0).resolves(tasksMock.tasks[0] as unknown as ITaskMock)
       .onCall(1).resolves(tasksMock.statusUpdatedOne as unknown as ITaskMock)
       .onCall(2).resolves(tasksMock.statusUpdatedTwo as unknown as ITaskMock)
+    
   });
 
   after(() => sinon.restore());
@@ -61,8 +62,6 @@ describe('task.service', () => {
 
   describe('update', () => {
     describe('error case', () => {
-      before(() => sinon.stub(taskModelMocked, 'readOne')
-        .resolves(null as unknown as ITaskMock));
       test('throws an error if id is not a string', async () => {
         try {
           await taskService.update(1 as unknown as string, tasksMock.wrongTask as TasksTypes)
@@ -91,8 +90,6 @@ describe('task.service', () => {
     });
 
     describe('ok case', () => {
-      before(() => sinon.stub(taskModelMocked, 'readOne')
-        .resolves({} as unknown as ITaskMock));
       test('if returns an object containing a updated task', async () => {
         const updatedTask = await taskService.update('1', tasksMock.creatingATask as TasksTypes);
 
@@ -147,6 +144,8 @@ describe('task.service', () => {
       });
     });
   });
+
+  describe('updateStatus', () => {
     const ENUM_STATUS_FALSE = { status: 'ok' }
     const ENUM_STATUS_TRUE_1 = { status: 'Em andamento' }
     const ENUM_STATUS_TRUE_2 = { status: 'Finalizado' }
