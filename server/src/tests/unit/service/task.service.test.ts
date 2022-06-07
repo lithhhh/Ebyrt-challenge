@@ -134,6 +134,19 @@ describe('task.service', () => {
   });
 
   describe('read', () => {
+    describe('ok case', () => {
+      test('returns an array of objects containing the required keys', async () => {
+        const allTasks = await taskService.read() as ITaskMock[];
+
+        expect(allTasks).to.be.a('array');
+
+        allTasks.forEach((task) => {
+          expect(task).to.be.a('object');
+          expect(task).to.contain.all.keys('id', 'status', 'title', 'details', 'color');
+        });
+      });
+    });
+  });
     describe('error case', () => {
       test('', () => {});
     });
