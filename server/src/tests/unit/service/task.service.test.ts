@@ -78,6 +78,8 @@ describe('task.service', () => {
     });
 
     describe('ok case', () => {
+      before(() => sinon.stub(taskModelMocked, 'readOne')
+        .resolves({} as unknown as ITaskMock));
       test('if returns an object containing a updated task', async () => {
         const updatedTask = await taskService.update('1', tasksMock.creatingATask as TasksTypes);
 
