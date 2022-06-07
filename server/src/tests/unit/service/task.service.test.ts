@@ -19,8 +19,21 @@ describe('task.service', () => {
   before(() => {
     sinon.stub(taskModelMocked, 'create').resolves(tasksMock.tasks[0] as unknown as ITaskMock)
     sinon.stub(taskModelMocked, 'delete').resolves(tasksMock.tasks[0] as unknown as ITaskMock)
-    sinon.stub(taskModelMocked, 'update').resolves(tasksMock.tasks[0] as unknown as ITaskMock)
-    sinon.stub(taskModelMocked, 'read').resolves(tasksMock.tasks as unknown as ITaskMock[])
+    sinon.stub(taskModelMocked, 'read').resolves(tasksMock.tasks as ITaskMock[])
+
+    sinon.stub(taskModelMocked, 'readOne')
+      .onCall(0).resolves(null as unknown as ITaskMock)
+      .onCall(1).resolves({} as unknown as ITaskMock)
+      .onCall(2).resolves(null as unknown as ITaskMock)
+      .onCall(3).resolves({} as unknown as ITaskMock)
+      .onCall(4).resolves(null as unknown as ITaskMock)
+      .onCall(5).resolves({} as unknown as ITaskMock)
+      .onCall(6).resolves({} as unknown as ITaskMock)
+
+    sinon.stub(taskModelMocked, 'update')
+      .onCall(0).resolves(tasksMock.tasks[0] as unknown as ITaskMock)
+      .onCall(1).resolves(tasksMock.statusUpdatedOne as unknown as ITaskMock)
+      .onCall(2).resolves(tasksMock.statusUpdatedTwo as unknown as ITaskMock)
   });
 
   after(() => sinon.restore());
