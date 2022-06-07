@@ -66,6 +66,15 @@ describe('task.service', () => {
           expect(e instanceof Error).to.be.true;
         }
       });
+
+      test('throws a DomainError if ID not found', async () => {
+        try {
+          await taskService.update('1', tasksMock.creatingATask as TasksTypes);
+        } catch (e) {          
+          expect(e instanceof DomainError).to.be.true;
+          expect(e instanceof Error).to.be.true;
+        }
+      });
     });
 
     describe('ok case', () => {
