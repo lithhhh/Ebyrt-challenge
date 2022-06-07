@@ -147,8 +147,36 @@ describe('task.service', () => {
       });
     });
   });
+    const ENUM_STATUS_FALSE = { status: 'ok' }
+    const ENUM_STATUS_TRUE_1 = { status: 'Em andamento' }
+    const ENUM_STATUS_TRUE_2 = { status: 'Finalizado' }
     describe('error case', () => {
-      test('', () => {});
+      test('throws an error if id is not a string', async () => {
+        try {
+          await taskService.updateStatus(1 as unknown as string, ENUM_STATUS_FALSE as ITaskMock);
+        } catch (e) {          
+          expect(e instanceof ZodError).to.be.true;
+          expect(e instanceof Error).to.be.true;
+        }
+      });
+
+      test('throws an error if status does not exist', async () => {
+        try {
+          await taskService.updateStatus('1', ENUM_STATUS_FALSE as ITaskMock);
+        } catch (e) {          
+          expect(e instanceof ZodError).to.be.true;
+          expect(e instanceof Error).to.be.true;
+        }
+      });
+
+      test('throws a DomainError if ID not found', async () => {
+        try {
+          await taskService.updateStatus('1', ENUM_STATUS_TRUE_1 as ITaskMock)
+        } catch (e) {          
+          expect(e instanceof DomainError).to.be.true;
+          expect(e instanceof Error).to.be.true;
+        }
+      });
     });
 
     describe('ok case', () => {
