@@ -48,6 +48,8 @@ describe('task.service', () => {
 
   describe('update', () => {
     describe('error case', () => {
+      before(() => sinon.stub(taskModelMocked, 'readOne')
+        .resolves(null as unknown as ITaskMock));
       test('throws an error if id is not a string', async () => {
         try {
           await taskService.update(1 as unknown as string, tasksMock.wrongTask as TasksTypes)
