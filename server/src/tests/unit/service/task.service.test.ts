@@ -180,7 +180,19 @@ describe('task.service', () => {
     });
 
     describe('ok case', () => {
-      test('', () => {});
+      test('if returns an object containing a updated task', async () => {
+        const updatedStatusOne = await taskService.updateStatus('1', ENUM_STATUS_TRUE_1 as ITaskMock) as ITaskMock;
+        const updatedStatusTwo = await taskService.updateStatus('2', ENUM_STATUS_TRUE_2 as ITaskMock) as ITaskMock;
+
+        expect(updatedStatusOne).to.be.a('object');
+        expect(updatedStatusTwo).to.be.a('object');
+
+        expect(updatedStatusOne).to.contain.all.keys('id', 'status', 'title', 'details', 'color');
+        expect(updatedStatusTwo).to.contain.all.keys('id', 'status', 'title', 'details', 'color');
+
+        expect(updatedStatusOne.status).to.be.equal('Em andamento');
+        expect(updatedStatusTwo.status).to.be.equal('Finalizado');
+      });
     });
   });
 });
