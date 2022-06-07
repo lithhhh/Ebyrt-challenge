@@ -124,7 +124,12 @@ describe('task.service', () => {
     });
 
     describe('ok case', () => {
-      test('', () => {});
+      test('if returns an object containing a updated task', async () => {
+        const updatedTask = await taskService.delete('1');
+  
+        expect(updatedTask).to.be.a('object');
+        expect(updatedTask).to.contain.all.keys('id', 'status', 'title', 'details', 'color');
+      });
     });
   });
 
