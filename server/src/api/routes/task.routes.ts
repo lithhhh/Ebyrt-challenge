@@ -1,4 +1,5 @@
 import { Router, Request, Response } from 'express';
+import { TypedRequestQuery } from '../../@types/type';
 import { TaskController } from '../../app/controller';
 
 export default class TaskRouter {
@@ -29,11 +30,16 @@ export default class TaskRouter {
   }
 
   private read(): void {
-    this.router.get(`${this.route}s`, async (req: Request, res: Response) => {
-      const tasks = await this.taskController.read();
+    this.router.get(
+      `${this.route}s`,
+      async (req: TypedRequestQuery<{ status: string }>, res: Response) => {
+        const { status } = req.query;
+        
+        const tasks = await this.taskController.read(status);
 
-      return res.status(200).json(tasks);
-    });
+        return res.status(200).json(tasks);
+      },
+    );
   }
 
   private update(): void {
