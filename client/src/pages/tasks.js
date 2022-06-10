@@ -5,6 +5,7 @@ import Input from '../components/input.task';
 import CardTask from '../components/card.task';
 import myContext from '../context/myContext';
 
+import '../styles/tasks.css';
 function Tasks() {
   const { tasks } = useContext(myContext);
 
