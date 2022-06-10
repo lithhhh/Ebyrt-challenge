@@ -1,8 +1,4 @@
 import React, { useContext, useState } from 'react';
-import {
-  Form, Button, Row, Col, Container,
-} from 'react-bootstrap';
-
 import api from '../utils/api';
 import TaskContext from '../context/myContext';
 
@@ -39,28 +35,18 @@ function Input() {
   };
 
   return (
-    <Container className='main-width p-2'>
-      <Form onSubmit={ handlerSubmit } htmlFor="inlineFormInput">
-        <Row className="justify-content-md-center">
-          <Col sm={ 8 } xs="auto">
-          <Form.Control
-            type="text"
-            placeholder="digite aqui sua task"
-            name='title'
-            onChange={ handleChange }
-            value={ task.title }
+    <div>
+      <form onSubmit={ handlerSubmit }>
+        <input
+          type="text"
+          placeholder="digite aqui sua task"
+          name='title'
+          onChange={ handleChange }
+          value={ task.title }
           />
-          </Col>
-          <Col sm={ 1 } xs={ 1 }>
-            <Button
-              type="submit"
-            >
-            adicionar
-            </Button>
-          </Col>
-        </Row>
-      </Form>
-    </Container>
+        <input type="submit" value="adicionar" />
+      </form>
+    </div>
   );
 }
 
