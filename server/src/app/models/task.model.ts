@@ -7,6 +7,9 @@ class TaskModel extends MongoModel<TasksTypes> {
   constructor(model = createModel('Tarefas', taskSchema)) {
     super(model);
   }
+
+  read = async (status?: string | null) => (status ? this
+    .model.find({ status }) : this.model.find());
 }
 
 export default TaskModel;
