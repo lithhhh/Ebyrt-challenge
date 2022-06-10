@@ -7,7 +7,7 @@ export default abstract class Controller<T> {
 
   create = async (obj: T) => this.service.create(obj);
 
-  read = async () => this.service.read();
+  read = async (query?: string | null) => this.service.read(query);
 
   update = async (id: string, obj: T) => this.service.update(id, obj);
 
