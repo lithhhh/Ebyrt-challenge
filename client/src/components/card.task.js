@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  ButtonGroup, Card, Col,
+  ButtonGroup, Card, Col, ButtonToolbar,
 } from 'react-bootstrap';
 
 import { EditModal, DeleteButton, DropdownStatus } from './sub.components';
@@ -17,14 +17,16 @@ function CardTask({
         <Card.Header>{ title }</Card.Header>
         <Card.Body>
           {!details && <Card.Subtitle className="mb-2 text-muted">Sem detalhes</Card.Subtitle>}
-          <Card.Text>
+          <Card.Text style={ { whiteSpace: 'pre-wrap' } }>
             { details }
           </Card.Text>
-          <ButtonGroup className="d-flex">
-            <EditModal color={ color } title={ title } details={ details } id={ id } />
-            <DeleteButton id={ id } />
+          <ButtonToolbar className="justify-content-between">
+            <ButtonGroup className="d-flex">
+              <EditModal color={ color } title={ title } details={ details } id={ id } />
+              <DeleteButton id={ id } />
+            </ButtonGroup>
             <DropdownStatus id={ id } status={ status } />
-          </ButtonGroup>
+          </ButtonToolbar>
         </Card.Body>
       </Card>
     </Col>
