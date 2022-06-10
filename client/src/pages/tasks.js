@@ -1,31 +1,35 @@
 import React, { useContext } from 'react';
-import { Row } from 'react-bootstrap';
+import { Row, Container } from 'react-bootstrap';
 
-import Input from '../components/input.task';
-import CardTask from '../components/card.task';
+import { Input, CardTask, NavFilter } from '../components';
 import myContext from '../context/myContext';
+
+import '../styles/tasks.css';
 
 function Tasks() {
   const { tasks } = useContext(myContext);
 
   return (
-    <div>
+    <Container>
       <Input />
-      <Row xs={1} md={3} className="g-4">
-        {Array.from(tasks).map(({
-          title, color, details, status, _id,
-        }, idx) => (
-          <CardTask
-            key={ idx }
-            title={ title }
-            color={ color }
-            details={ details }
-            id={ _id }
-            status={ status }
-          />
-        ))}
-      </Row>
-    </div>
+      <NavFilter />
+      <Container fluid className='main-width'>
+        <Row xs={1} sm={1} md={1} className="g-3">
+          {Array.from(tasks).map(({
+            title, color, details, status, _id,
+          }, idx) => (
+            <CardTask
+              key={ idx }
+              title={ title }
+              color={ color }
+              details={ details }
+              id={ _id }
+              status={ status }
+            />
+          ))}
+        </Row>
+      </Container>
+    </Container>
   );
 }
 
