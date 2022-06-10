@@ -1,0 +1,15 @@
+.main-width {
+  width: 60%;
+}
+
+@media screen and (max-width: 850px) {
+  .main-width {
+    width: 85%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .main-width {
+    width: auto;
+  }
+}
