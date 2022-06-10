@@ -8,8 +8,10 @@ export default abstract class Service<T> {
     return this.model.create(obj);
   }
 
-  public async read(): Promise<T[] | null | ServiceError> {
-    return this.model.read();
+  public async read(
+    status?: string | null,
+  ): Promise<T[] | null | ServiceError> {
+    return this.model.read(status);
   }
 
   public async update(id: string, obj: T): Promise<T | null | ServiceError> {
