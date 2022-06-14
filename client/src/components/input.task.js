@@ -3,6 +3,7 @@ import {
   Form, Button, Row, Col, Container,
 } from 'react-bootstrap';
 
+import { CustomAlert } from './sub.components';
 import api from '../utils/api';
 import TaskContext from '../context/myContext';
 
@@ -12,8 +13,18 @@ const taskSchema = {
 
 function Input() {
   const [task, setTask] = useState(taskSchema);
-  const { setTasks } = useContext(TaskContext);
+  const [alert, setAlert] = useState(false);
 
+  useEffect(() => {
+    const timeoutValidated = () => {
+      setTimeout(async () => {
+        setValidated(false);
+        setAlert(false);
+      }, +'4000');
+    };
+
+    timeoutValidated();
+  }, [validated, alert]);
   const handlerSubmit = async (e) => {
     e.preventDefault();
 
@@ -24,8 +35,7 @@ function Input() {
       setTasks((cur) => [...cur, data.created]);
       setTask(taskSchema);
     } catch (err) {
-      console.log(err);
-      alert('houve um erro ao adicionar a task.');
+      setAlert(true);
     }
   };
 
@@ -40,7 +50,7 @@ function Input() {
 
   return (
     <Container className='main-width p-2'>
-      <Form onSubmit={ handlerSubmit } htmlFor="inlineFormInput">
+      {alert && <CustomAlert message='Tente novamente mais tarde :(.' />}
         <Row className="justify-content-md-center">
           <Col sm={ 7 } xs="auto">
           <Form.Control
