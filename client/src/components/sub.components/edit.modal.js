@@ -4,13 +4,14 @@ import { Button, Modal, Form } from 'react-bootstrap';
 
 import myContext from '../../context/myContext';
 import api from '../../utils/api';
+import CustomAlert from './alert';
 
 function EditModal({
   title, details, color, id,
 }) {
   const { tasks, setTasks } = useContext(myContext);
   const [show, setShow] = useState(false);
-
+  const [alert, setAlert] = useState(false);
   const [infos, setInfos] = useState(
     {
       title,
@@ -48,8 +49,7 @@ function EditModal({
       setTasks(newTasks);
       handleClose();
     } catch (err) {
-      console.log(err);
-      alert('houve um erro ao adicionar a task.');
+      setAlert(true);
     }
   };
 
@@ -63,6 +63,7 @@ function EditModal({
         <Modal.Header closeButton>
           <Modal.Title>Modo de edição</Modal.Title>
         </Modal.Header>
+        {alert && <CustomAlert message='Tente novamente mais tarde :(.' />}
         <Modal.Body>
           <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
