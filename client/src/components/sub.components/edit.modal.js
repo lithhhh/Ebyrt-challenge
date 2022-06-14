@@ -4,13 +4,16 @@ import { Button, Modal, Form } from 'react-bootstrap';
 
 import myContext from '../../context/myContext';
 import api from '../../utils/api';
+import CustomAlert from './alert';
 
 function EditModal({
   title, details, color, id,
 }) {
   const { tasks, setTasks } = useContext(myContext);
-  const [show, setShow] = useState(false);
 
+  const [show, setShow] = useState(false);
+  const [validated, setValidated] = useState(false);
+  const [alert, setAlert] = useState(false);
   const [infos, setInfos] = useState(
     {
       title,
@@ -22,6 +25,15 @@ function EditModal({
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const check = (e) => {
+    console.log(!e.currentTarget.checkValidity());
+    if (!e.currentTarget.checkValidity()) {
+      setValidated(true);
+      return e.stopPropagation();
+    }
+    return setValidated(false);
+  };
+
   const handleChange = (e) => {
     const { value } = e.target;
 
@@ -29,6 +41,8 @@ function EditModal({
       ...infos,
       [e.target.name]: value,
     });
+
+    return null;
   };
 
   const handleUpdate = async () => {
@@ -48,8 +62,7 @@ function EditModal({
       setTasks(newTasks);
       handleClose();
     } catch (err) {
-      console.log(err);
-      alert('houve um erro ao adicionar a task.');
+      setAlert(true);
     }
   };
 
@@ -63,8 +76,14 @@ function EditModal({
         <Modal.Header closeButton>
           <Modal.Title>Modo de edição</Modal.Title>
         </Modal.Header>
+        {alert && <CustomAlert message='Tente novamente mais tarde :(.' />}
         <Modal.Body>
-          <Form>
+          <Form
+            className='position-relative'
+            validated={ validated }
+            noValidate
+            onChange={ check }
+          >
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Título</Form.Label>
               <Form.Control
@@ -74,7 +93,10 @@ function EditModal({
                 onChange={ handleChange }
                 name='title'
                 autoFocus
+                minLength={ 5 }
+                required
               />
+            <Form.Control.Feedback type="invalid">é necessário no mínimo 5 letras!</Form.Control.Feedback>
             </Form.Group>
             <Form.Group
               className="mb-3"
@@ -101,7 +123,11 @@ function EditModal({
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleUpdate}>
+          <Button
+            variant="primary"
+            onClick={ handleUpdate }
+            disabled={ validated }
+          >
             Save Changes
           </Button>
         </Modal.Footer>
