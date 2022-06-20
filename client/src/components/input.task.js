@@ -5,14 +5,14 @@ import {
 
 import { CustomAlert } from './sub.components';
 import api from '../utils/api';
-import TaskContext from '../context/myContext';
+import myContext from '../context/myContext';
 
 const taskSchema = {
   title: '',
 };
 
 function Input() {
-  const { setTasks } = useContext(TaskContext);
+  const { setTasks } = useContext(myContext);
 
   const [task, setTask] = useState(taskSchema);
   const [validated, setValidated] = useState(false);
