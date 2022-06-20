@@ -26,7 +26,6 @@ function EditModal({
   const handleShow = () => setShow(true);
 
   const check = (e) => {
-    console.log(!e.currentTarget.checkValidity());
     if (!e.currentTarget.checkValidity()) {
       setValidated(true);
       return e.stopPropagation();
@@ -121,14 +120,14 @@ function EditModal({
             name='color'
           />
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            Fechar
           </Button>
           <Button
             variant="primary"
             onClick={ handleUpdate }
             disabled={ validated }
           >
-            Save Changes
+            Salvar
           </Button>
         </Modal.Footer>
       </Modal>
