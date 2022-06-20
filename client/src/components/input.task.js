@@ -1,19 +1,33 @@
 import React, { useContext, useEffect, useState } from 'react';
-import React, { useContext, useState } from 'react';
 import {
   Form, Button, Row, Col, Container,
 } from 'react-bootstrap';
 
 import { CustomAlert } from './sub.components';
 import api from '../utils/api';
-import TaskContext from '../context/myContext';
+import myContext from '../context/myContext';
 
 const taskSchema = {
   title: '',
 };
 
 function Input() {
-  const { setTasks } = useContext(TaskContext);
+  const { setTasks } = useContext(myContext);
+
+  const [task, setTask] = useState(taskSchema);
+  const [validated, setValidated] = useState(false);
+  const [alert, setAlert] = useState(false);
+
+  useEffect(() => {
+    const timeoutValidated = () => {
+      setTimeout(async () => {
+        setValidated(false);
+        setAlert(false);
+      }, +'4000');
+    };
+
+    timeoutValidated();
+  }, [validated, alert]);
 
   const [task, setTask] = useState(taskSchema);
   const [validated, setValidated] = useState(false);
