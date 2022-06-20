@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { Row, Container } from 'react-bootstrap';
-
 import {
   Input, CardTask, NavFilter, NoTasks,
 } from '../components';
