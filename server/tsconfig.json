@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "./dist",
+    "outDir": "./build",
     "rootDir": ".",
     "target": "es2019",
     "module": "commonjs",
@@ -13,6 +13,7 @@
     "strict": true,
     "skipLibCheck": true
   },
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "src/tests"],
+  "include": ["src/**/*"],
 }
   
