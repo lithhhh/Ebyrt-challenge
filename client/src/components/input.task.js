@@ -29,21 +29,6 @@ function Input() {
     timeoutValidated();
   }, [validated, alert]);
 
-  const [task, setTask] = useState(taskSchema);
-  const [validated, setValidated] = useState(false);
-  const [alert, setAlert] = useState(false);
-
-  useEffect(() => {
-    const timeoutValidated = () => {
-      setTimeout(async () => {
-        setValidated(false);
-        setAlert(false);
-      }, +'4000');
-    };
-
-    timeoutValidated();
-  }, [validated, alert]);
-
   const handlerSubmit = async (e) => {
     e.preventDefault();
 
