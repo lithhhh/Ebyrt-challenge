@@ -54,6 +54,10 @@ Quando estiver pronto ficará assim:
   Creating frontend ... done
 ```
 
+A aplicação estará sendo executada nas seguintes portas:
+- frontend: <http://localhost:3000/>
+- backend: http://localhost:3001/
+
 ### Para encerrar a aplicação utilize:
 
 Use este comando para desativar a orquestração:
